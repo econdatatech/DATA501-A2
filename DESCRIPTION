@@ -1,11 +1,17 @@
 Package: distancemeasures
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Plot various distance measures in regression context (Cooks, DFFITS,Hadis)
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Corvin Idler, corvin.idler@gmail.com
+Maintainer: corvin.idler@gmail.com
+Description: The aim of the package is be to create a graph similar to a Cooks distance plot (but with more distance
+measures).
+The user will provide the program with a data set as well as a model (which is an object of class lm)
+The functionality of the program entail performing a simple diagnostics on the influence of points.
+The package is be able to calculate at least three measures of influence:
+• Cooks Distance Measure (Cook, 1977)
+• DFFITS (Welsch and Kuh, 1977; Belsley, 1980)
+• Hadis Influence Measure (Hadi, 1992
+License: `use_gpl3_license()`
 Encoding: UTF-8
 LazyData: true
