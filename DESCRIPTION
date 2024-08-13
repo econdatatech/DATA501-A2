@@ -8,3 +8,5 @@ Description: The aim of the package is be to create a graph similar to a Cooks d
 License: `use_gpl3_license()`
 Encoding: UTF-8
 LazyData: true
+Imports:
+    ggplot2
