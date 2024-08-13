@@ -12,22 +12,22 @@ The functionality of the program entail performing a simple diagnostics on the i
 
 The code should be able to calculate at least three measures of influence:
 
-* Cooks Distance Measure (Cook, 1977) \
-* DFFITS (Welsch and Kuh, 1977; Belsley, 1980) \
-* Hadis Influence Measure (Hadi, 1992) \
+* Cooks Distance Measure (Cook, 1977) 
+* DFFITS (Welsch and Kuh, 1977; Belsley, 1980) 
+* Hadis Influence Measure (Hadi, 1992) 
 
 The program will have the following features:
 
-* at least three inputs (2 required and 1 default/optional) \
-     * required input is the data and model (a lm object) \
-     * optional/default input is up to you \
-* input validation \
-* perform different distance measure depending on arguments \
-* catches errors \
-    * NA values \
-    * inf values \
-    * wrong format \
-    * wrong dimensions \
+* at least three inputs (2 required and 1 default/optional) 
+     * required input is the data and model (a lm object) 
+     * optional/default input is up to you 
+* input validation 
+* perform different distance measure depending on arguments 
+* catches errors 
+    * NA values 
+    * inf values 
+    * wrong format 
+    * wrong dimensions 
 * create graphs visualizing so results
 * typical package features
     * installable
