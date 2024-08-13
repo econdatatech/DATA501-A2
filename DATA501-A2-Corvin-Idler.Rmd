@@ -4,9 +4,37 @@ output: html_document
 date: "2024-08-13"
 ---
 
+This is a PDF generated from a RMarkdown file for Assignment 2 of the DATA 501 class 2024 from Victoria University Wellington
+https://www.wgtn.ac.nz/courses/data/501/2024/offering?crn=33170
+
+The repository underpinning this file and assignement can be found at https://github.com/econdatatech/distancemeasures/
+I created an R package hosted at the above URL that will be loaded with the following lines of code
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(devtools)
+install_github("econdatatech/distancemeasures")
+library(ggplot2)
+library(car)
+data(mtcars)
+
+# Fit a linear regression model
+# Predicting 'mpg' (miles per gallon) based on 'disp' (displacement), 'hp' (horsepower), and 'wt' (weight)
+model <- lm(mpg ~ disp + hp + wt, data = mtcars)
+
 ```
+
+
+The user will provide the program with a data set as well as a model (which is an object of class lm)
+The functionality of the program entail performing a simple diagnostics on the influence of points.
+
+The code should be able to calculate at least three measures of influence:
+
+* Cooks Distance Measure (Cook, 1977) 
+* DFFITS (Welsch and Kuh, 1977; Belsley, 1980) 
+* Hadis Influence Measure (Hadi, 1992) 
+
+
 
 ## R Markdown
 
