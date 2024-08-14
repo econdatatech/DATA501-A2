@@ -20,17 +20,17 @@ The package has one single user facing function, namely distances()
 ```{r packageuse, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(distancemeasures)
-#Generate the independent variable and the error
-x1=rnorm(100,50,9)
-x2=rnorm(100,200,64)
-error=rnorm(100,0,16)
-#Generate the dependent variable (b0=150, b1=-4, b2=2.5)
-y1=150-(4*x1)+(2.5*x2)+error
+# Generate the independent variable and the error
+x1 <- rnorm(100, 50, 9)
+x2 <- rnorm(100, 200, 64)
+error <- rnorm(100, 0, 16)
+# Generate the dependent variable (b0=150, b1=-4, b2=2.5)
+y1 <- 150 - (4 * x1) + (2.5 * x2) + error
 
-randomdata<- data.frame(y1, x1, x2)
+randomdata <- data.frame(y1, x1, x2)
 # Fit a linear regression model
-# Predicting y1 based on x1 and x2 
+# Predicting y1 based on x1 and x2
 model <- lm(y1 ~ x1 + x2, data = randomdata)
 par(mar = rep(2, 4))
-distances(randomdata,model)
+distances(randomdata, model)
 ```

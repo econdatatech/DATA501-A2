@@ -19,6 +19,3 @@ a list with names entries (cooks,dffits,hadi)
 \description{
 distances
 }
-\examples{
-library(car); data(mtcars); model <- lm(mpg ~ disp + hp + wt, data = mtcars); distances(mtcars,model)
-}
