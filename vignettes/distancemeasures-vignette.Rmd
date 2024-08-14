@@ -1,0 +1,29 @@
+---
+title: "distancemeasures-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{distancemeasures-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+As a user of the distancemeasures package you will provide the program with a data set as well as a model (which is an object of class lm).
+Three measures of influence will then be calculated and plotted (unless supressed by input parameter plot=FALSE").
+
+* Cooks Distance Measure (Cook, 1977) 
+* DFFITS (Welsch and Kuh, 1977; Belsley, 1980) 
+* Hadis Influence Measure (Hadi, 1992) 
+
+As an example we can use the data from the famous car package and fit a linear model and then plot some distance/influence measures
+
+```{r packageuse, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(car)
+library(distancemeasures)
+data(mtcars)
+# Fit a linear regression model
+# Predicting 'mpg' (miles per gallon) based on 
+# 'disp' (displacement), 'hp' (horsepower), and 'wt' (weight)
+model <- lm(mpg ~ disp + hp + wt, data = mtcars)
+par(mar = rep(2, 4))
+distances(mtcars,model)
+```

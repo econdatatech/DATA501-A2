@@ -1,4 +1,14 @@
 
+#' distances
+#'
+#' @param data A Dataframe
+#' @param model A linear model of class lm
+#' @param plots A boolean parameter to supress plots
+#'
+#' @return a list with names entries (cooks,dffits,hadi)
+#' @export
+#'
+#' @examples
 distances <- function(data, model, plots=TRUE){
 
   #input validation
