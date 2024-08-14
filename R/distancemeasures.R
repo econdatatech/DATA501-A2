@@ -22,11 +22,10 @@ distances <- function(data, model, plots=TRUE){
 
   # divide frame in 2X2 grid
   par( mfrow= c(2,2) )
-
   # draw 4 plots
-  plot(cooks)
-  plot(dffits)
-  plot(hadi)
+  plot(cooks,layout = NULL)
+  plot(dffits,layout = NULL)
+  plot(hadi,layout = NULL)
   }
   return(list(cooks=cooks,dffits=dffits,hadi=hadi))
 
