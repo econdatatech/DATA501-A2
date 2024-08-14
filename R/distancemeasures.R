@@ -8,7 +8,7 @@
 #' @return a list with names entries (cooks,dffits,hadi)
 #' @export
 #'
-#' @examples
+#' @examples library(car); data(mtcars); model <- lm(mpg ~ disp + hp + wt, data = mtcars); distances(mtcars,model)
 distances <- function(data, model, plots=TRUE){
 
   #input validation

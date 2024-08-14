@@ -1,57 +1,44 @@
 ---
 title: "DATA501 Assignement 2 - Corvin Idler - ID 300598312"
-output: html_document
+output:
+  pdf_document: default
 date: "2024-08-13"
 ---
 
 This is a PDF generated from a RMarkdown file for Assignment 2 of the DATA 501 class 2024 from Victoria University Wellington
 https://www.wgtn.ac.nz/courses/data/501/2024/offering?crn=33170
 
-The repository underpinning this file and assignement can be found at https://github.com/econdatatech/distancemeasures/
+The repository underpinning this file and assignment can be found at https://github.com/econdatatech/distancemeasures/
 I created an R package hosted at the above URL that will be loaded with the following lines of code
 
-```{r setup, include=FALSE}
+```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
 library(devtools)
-install_github("econdatatech/distancemeasures")
-library(ggplot2)
-library(car)
-data(mtcars)
-
-# Fit a linear regression model
-# Predicting 'mpg' (miles per gallon) based on 'disp' (displacement), 'hp' (horsepower), and 'wt' (weight)
-model <- lm(mpg ~ disp + hp + wt, data = mtcars)
-
+install_github("econdatatech/distancemeasures",force=TRUE)
 ```
-
-
 The user will provide the program with a data set as well as a model (which is an object of class lm)
-The functionality of the program entail performing a simple diagnostics on the influence of points.
-
-The code should be able to calculate at least three measures of influence:
+Three measures of influence will be calculated and plotted"
 
 * Cooks Distance Measure (Cook, 1977) 
 * DFFITS (Welsch and Kuh, 1977; Belsley, 1980) 
 * Hadis Influence Measure (Hadi, 1992) 
 
+To test the package we can use the data from the famous car package and fit a linear model and then plot some distance/influence measures
 
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r packageuse, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+library(car)
+library(distancemeasures)
+data(mtcars)
+# Fit a linear regression model
+# Predicting 'mpg' (miles per gallon) based on 
+# 'disp' (displacement), 'hp' (horsepower), and 'wt' (weight)
+model <- lm(mpg ~ disp + hp + wt, data = mtcars)
+distances(mtcars,model)
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
