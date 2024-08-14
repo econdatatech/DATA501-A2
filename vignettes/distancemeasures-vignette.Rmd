@@ -15,15 +15,22 @@ Three measures of influence will then be calculated and plotted (unless supresse
 
 As an example we can use the data from the famous car package and fit a linear model and then plot some distance/influence measures
 
+The package has one single user facing function, namely distances()
+
 ```{r packageuse, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
-library(car)
 library(distancemeasures)
-data(mtcars)
+#Generate the independent variable and the error
+x1=rnorm(100,50,9)
+x2=rnorm(100,200,64)
+error=rnorm(100,0,16)
+#Generate the dependent variable (b0=150, b1=-4, b2=2.5)
+y1=150-(4*x1)+(2.5*x2)+error
+
+randomdata<- data.frame(y1, x1, x2)
 # Fit a linear regression model
-# Predicting 'mpg' (miles per gallon) based on 
-# 'disp' (displacement), 'hp' (horsepower), and 'wt' (weight)
-model <- lm(mpg ~ disp + hp + wt, data = mtcars)
+# Predicting y1 based on x1 and x2 
+model <- lm(y1 ~ x1 + x2, data = randomdata)
 par(mar = rep(2, 4))
-distances(mtcars,model)
+distances(randomdata,model)
 ```

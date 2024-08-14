@@ -8,7 +8,7 @@
 #' @return a list with names entries (cooks,dffits,hadi)
 #' @export
 #'
-#' @examples library(car); data(mtcars); model <- lm(mpg ~ disp + hp + wt, data = mtcars); distances(mtcars,model)
+#' @examples distances(mtcars,model)
 distances <- function(data, model, plots=TRUE){
 
   #input validation
@@ -21,7 +21,7 @@ distances <- function(data, model, plots=TRUE){
   }
 
   if (class(plots) != "logical") {
-    stop("The input parameter plots must be a boolean (object of class logical) so FALSE or TRUE")
+    stop("The input parameter plots must be a boolean")
   }
 
   cooks<-cooks_distance_lm(model)
