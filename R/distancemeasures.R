@@ -7,7 +7,12 @@
 #' @return a list with names entries (cooks,dffits,hadi)
 #' @export
 #'
-#' @examples x1 <- rnorm(100, 50, 9); y1 <-5*x1+1; randomdata <- data.frame(y1, x1); model <- lm(y1 ~ x1, data = randomdata); distances <- function(data, model, plots = TRUE)
+#' @examples{ x1 <- rnorm(100, 50, 9);
+#' y1 <-5*x1+1;
+#' randomdata <- data.frame(y1, x1);
+#' model <- lm(y1 ~ x1, data = randomdata);
+#' distances(randomdata, model, plots = TRUE)
+#' }
 
 distances <- function(data, model, plots=TRUE){
 # input validation
@@ -15,11 +20,11 @@ distances <- function(data, model, plots=TRUE){
     stop("The input data must be of type data.frame.")
   }
 
-  if (class(model) != "lm") {
+  if (!inherits(model,'lm')) {
     stop("The input model must be an object of class lm")
   }
 
-  if (class(plots) != "logical") {
+  if (!inherits(plots,'logical')) {
     stop("The input parameter plots must be a boolean")
   }
 
@@ -29,7 +34,7 @@ distances <- function(data, model, plots=TRUE){
 
   if (plots) {
     # divide frame in 2X2 grid
-    par(mfrow = c(2, 2))
+    graphics::par(mfrow = c(2, 2))
     # draw 4 plots
     plot(cooks, layout = NULL)
     plot(dffits, layout = NULL)
@@ -37,28 +42,27 @@ distances <- function(data, model, plots=TRUE){
   }
   return(list(cooks = cooks, dffits = dffits, hadi = hadi))
 
-  ## do more input data validations...
+  ## do more input data validations... (e.g. limits of rows for hadi?)
   ## do we need consistency checks between input data and what is in the model?
   ## check limitations of each method... e.g. https://www.statology.org/dffits-in-r/
   # e.g. A size-adjusted cutoff recommended by Belsley, Kuh, and Welsch is 2*sqrt(p/n)
   # not sure why the data also had to be provided to the function.
   # are we not able to get everything we need from the model itself?
   # Hadi measure also has a cut off value@!
+  # do better plots
 }
 
-# based on https://doi.org/10.2307/1268249
-# https://doi.org/10.1080/00401706.1977.10489493
-
-# From: https://github.com/SurajGupta/r-source/blob/master/src/library/stats/R/lm.influence.R
+# based on https://doi.org/10.1080/00401706.1977.10489493
+# and https://github.com/SurajGupta/r-source/blob/master/src/library/stats/R/lm.influence.R
 cooks_distance_lm <- function(model) {
   # as per page 15 of Cook 1977 (above equation 1)
-  resid <- weighted.residuals(model) # to allow for weighted regression
+  resid <- stats::weighted.residuals(model) # to allow for weighted regression
   # residual degrees of freedom (number of observ.
   # minus number of regression coefficients)
-  df <- df.residual(model)
-  sd <- sqrt(deviance(model) / df)
+  df <- stats::df.residual(model)
+  sd <- sqrt(stats::deviance(model) / df)
   # diagonals of the ‘hat’ matrix.
-  hat <- lm.influence(model, do.coef = FALSE)$hat
+  hat <- stats::lm.influence(model, do.coef = FALSE)$hat
 
   p <- model$rank
   # equation 7 in Cook 1977
@@ -71,9 +75,9 @@ cooks_distance_lm <- function(model) {
 # based on https://avys.omu.edu.tr/storage/app/public/rezzanu/141865/[David_A._Belsley,_Edwin_Kuh,_Roy_E._Welsch]_Regre(BookFi.org).pdf
 # and https://github.com/SurajGupta/r-source/blob/master/src/library/stats/R/lm.influence.R
 dffits_lm <- function(model) {
-  hat <- lm.influence(model, do.coef = FALSE)$hat
-  sigma <- lm.influence(model, do.coef = FALSE)$sigma
-  res <- weighted.residuals(model)
+  hat <- stats::lm.influence(model, do.coef = FALSE)$hat
+  sigma <- stats::lm.influence(model, do.coef = FALSE)$sigma
+  res <- stats::weighted.residuals(model)
   # based on equation 2.11 on page 15 of Belsley 1980
   # re-written to avoid one sqrt(1-hat)
   dffits <- res * sqrt(hat) / (sigma * (1 - hat))
@@ -83,9 +87,9 @@ dffits_lm <- function(model) {
 
 ## based on equation 3.7 in Hadi 1992 and 4.9.3 in Regression-Analysis-by-Example
 hadi_lm <- function(model) {
-  h <- hatvalues(model)
+  h <- stats::hatvalues(model)
   # based on sentence under equation 3.7
-  di <- residuals(model) / sqrt(sum(residuals(model)^2))
-  p <- length(coef(model)) - 1
+  di <- stats::residuals(model) / sqrt(sum(stats::residuals(model)^2))
+  p <- length(stats::coef(model)) - 1
   return(h / (1 - h) + (p + 1) / (1 - h) * di^2 / (1 - di^2))
 }

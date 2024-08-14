@@ -19,3 +19,11 @@ a list with names entries (cooks,dffits,hadi)
 \description{
 distances
 }
+\examples{
+{ x1 <- rnorm(100, 50, 9);
+y1 <-5*x1+1;
+randomdata <- data.frame(y1, x1);
+model <- lm(y1 ~ x1, data = randomdata);
+distances(randomdata, model, plots = TRUE)
+}
+}

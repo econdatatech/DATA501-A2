@@ -4,12 +4,12 @@ Title: Plot various distance measures in regression context (Cooks, DFFITS,Hadis
 Version: 0.1.0
 Authors@R: person("Corvin", "Idler", email = "corvin.idler@gmail.com",
   role = c("aut", "cre"))
-Description: The aim of the package is be to create a graph similar to a Cooks distance plot but with more distance measures (Cooks,DFFITS,Hadi)
+Description: The aim of the package is be to create a graph similar to a Cooks distance plot but with more distance measures (Cooks,DFFITS,Hadi).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports:
-    ggplot2
+    stats
 Suggests: 
     knitr,
     rmarkdown,
