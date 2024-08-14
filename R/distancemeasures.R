@@ -1,5 +1,6 @@
 
 distances <- function(data, model, plots=TRUE){
+
   #input validation
   if (!is.data.frame(data)) {
     stop("The input data must be of type data.frame.")
