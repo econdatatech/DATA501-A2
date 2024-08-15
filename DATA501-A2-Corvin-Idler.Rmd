@@ -3,20 +3,27 @@ title: "DATA501 Assignement 2 - Corvin Idler - ID 300598312"
 output:
   pdf_document: default
 date: "2024-08-13"
+bibliography: references.bib 
+
 ---
+# Introduction
 
 This is a PDF generated from a RMarkdown file for Assignment 2 of the DATA 501 class 2024 from Victoria University Wellington
 https://www.wgtn.ac.nz/courses/data/501/2024/offering?crn=33170
 
 The repository underpinning this file and assignment can be found at https://github.com/econdatatech/distancemeasures/
 
+## Install instructions
 I created an R package hosted at the above URL that will be loaded with the following lines of code
 
 ```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE,  warning = FALSE, message = FALSE)
+suppressWarnings({ 
 library(devtools)
 install_github("econdatatech/distancemeasures",force=TRUE)
+}) 
 ```
+## Purpose and execution example
 The user will provide the program with a data set as well as a model (which is an object of class lm)
 Three measures of influence will be calculated and plotted"
 
@@ -38,8 +45,66 @@ model <- lm(mpg ~ disp + hp + wt, data = mtcars)
 distances(mtcars,model)
 ```
 
+#Implementation details
+The user facing function distances() makes use of the following helper functions (one for each distance/influence measure):
+
+## Cooks distance
+```{r cookscode, include=TRUE}
+# based on https://doi.org/10.1080/00401706.1977.10489493
+# and https://github.com/SurajGupta/r-source/blob/master/src/library/stats/R/lm.influence.R
+cooks_distance_lm <- function(model) {
+  # as per page 15 of Cook 1977 (above equation 1)
+  resid <- stats::weighted.residuals(model) # to allow for weighted regression
+  # residual degrees of freedom (number of observ.
+  # minus number of regression coefficients)
+  df <- stats::df.residual(model)
+  sd <- sqrt(stats::deviance(model) / df)
+  # diagonals of the ‘hat’ matrix.
+  hat <- stats::lm.influence(model, do.coef = FALSE)$hat
+
+  p <- model$rank
+  # equation 7 in Cook 1977
+  D <- ((resid / (sd * sqrt((1 - hat)))^2 * hat) / (p * (1 - hat)))
+  D[is.infinite(D)] <- NaN
+  return(D)
+}
+```
 
 
+## dffits
+```{r dffitscode, include=TRUE}
+
+# based on https://avys.omu.edu.tr/storage/app/public/rezzanu/141865/[David_A._Belsley,_Edwin_Kuh,_Roy_E._Welsch]_Regre(BookFi.org).pdf
+# and https://github.com/SurajGupta/r-source/blob/master/src/library/stats/R/lm.influence.R
+dffits_lm <- function(model) {
+  hat <- stats::lm.influence(model, do.coef = FALSE)$hat
+  sigma <- stats::lm.influence(model, do.coef = FALSE)$sigma
+  res <- stats::weighted.residuals(model)
+  # based on equation 2.11 on page 15 of Belsley 1980
+  # re-written to avoid one sqrt(1-hat)
+  dffits <- res * sqrt(hat) / (sigma * (1 - hat))
+  dffits[is.infinite(dffits)] <- NaN
+  return(dffits)
+}
+```
+
+## Hadi
+Ali Haid criticises in his 1992 paper that all prexisting influence measure only assessed the influence on a specific regression result, he on the other hand proposes "a measure of overall potential influence" @Hadi1992.
+```{r hadicode, include=TRUE}
+#based on https://ideas.repec.org/a/eee/csdana/v14y1992i1p1-27.html
+
+
+
+hadi_lm <- function(model) {
+  h <- stats::hatvalues(model)
+  # based on sentence under equation 3.7
+  di <- stats::residuals(model) / sqrt(sum(stats::residuals(model)^2))
+  p <- length(stats::coef(model)) - 1
+  result <-(h / (1 - h) + (p + 1) / (1 - h) * di^2 / (1 - di^2))
+  result[is.infinite(result)] <- NaN
+  return(result)
+}
+```
 
 
 
