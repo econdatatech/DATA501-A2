@@ -9,10 +9,11 @@ This is a PDF generated from a RMarkdown file for Assignment 2 of the DATA 501 c
 https://www.wgtn.ac.nz/courses/data/501/2024/offering?crn=33170
 
 The repository underpinning this file and assignment can be found at https://github.com/econdatatech/distancemeasures/
+
 I created an R package hosted at the above URL that will be loaded with the following lines of code
 
 ```{r setup, include=TRUE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,  warning = FALSE, message = FALSE)
 library(devtools)
 install_github("econdatatech/distancemeasures",force=TRUE)
 ```

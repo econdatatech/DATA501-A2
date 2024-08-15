@@ -42,14 +42,6 @@ distances <- function(data, model, plots=TRUE){
   }
   return(list(cooks = cooks, dffits = dffits, hadi = hadi))
 
-  ## do more input data validations... (e.g. limits of rows for hadi?)
-  ## do we need consistency checks between input data and what is in the model?
-  ## check limitations of each method... e.g. https://www.statology.org/dffits-in-r/
-  # e.g. A size-adjusted cutoff recommended by Belsley, Kuh, and Welsch is 2*sqrt(p/n)
-  # not sure why the data also had to be provided to the function.
-  # are we not able to get everything we need from the model itself?
-  # Hadi measure also has a cut off value@!
-  # do better plots
 }
 
 # based on https://doi.org/10.1080/00401706.1977.10489493
@@ -91,5 +83,7 @@ hadi_lm <- function(model) {
   # based on sentence under equation 3.7
   di <- stats::residuals(model) / sqrt(sum(stats::residuals(model)^2))
   p <- length(stats::coef(model)) - 1
-  return(h / (1 - h) + (p + 1) / (1 - h) * di^2 / (1 - di^2))
+  result <-(h / (1 - h) + (p + 1) / (1 - h) * di^2 / (1 - di^2))
+  result[is.infinite(result)] <- NaN
+  return(result)
 }
