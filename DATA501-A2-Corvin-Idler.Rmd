@@ -76,6 +76,7 @@ cooks_distance_lm <- function(model) {
 
 
 ## dffits
+This implementation is based on @Belsley1980 and @Chatterjee2015
 ```{r dffitscode, include=TRUE}
 
 # based on https://avys.omu.edu.tr/storage/app/public/rezzanu/141865/[David_A._Belsley,_Edwin_Kuh,_Roy_E._Welsch]_Regre(BookFi.org).pdf
