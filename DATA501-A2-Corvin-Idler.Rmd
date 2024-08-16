@@ -13,6 +13,9 @@ https://www.wgtn.ac.nz/courses/data/501/2024/offering?crn=33170
 
 The repository underpinning this file and assignment can be found at https://github.com/econdatatech/distancemeasures/
 
+and the package manual under 
+https://github.com/econdatatech/distancemeasures/blob/master/inst/doc/distancemeasures_0.1.0.pdf
+
 ## Install instructions
 I created an R package hosted at the above URL that will be loaded with the following lines of code
 
