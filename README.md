@@ -38,3 +38,10 @@ The program will have the following features:
 You will submit pdf generated from a Rmarkdown file. This file gives opportunity to explain some background,
 particular choices and rational of your implementation. This pdf will also include a link to a GitHub repository
 and/or instructions to install.
+
+
+The package can be installed from Github using:
+
+install.packages("devtools")
+devtools::install_github("econdatatech/distancemeasures")
+The main function is the user facing function distances() which takes as a parameter an input dataset, a corresponding model of class lm and an option parameter plots that takes boolean values to determine if plots should be rendered (plots=TRUE) or not (plots=FALSE).
