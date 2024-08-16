@@ -42,6 +42,9 @@ and/or instructions to install.
 
 The package can be installed from Github using:
 
+```{r, eval=FALSE}
 install.packages("devtools")
-devtools::install_github("econdatatech/distancemeasures")
+devtools::install_github("econdatatech/distancemeasures") 
+```
+
 The main function is the user facing function distances() which takes as a parameter an input dataset, a corresponding model of class lm and an option parameter plots that takes boolean values to determine if plots should be rendered (plots=TRUE) or not (plots=FALSE).
