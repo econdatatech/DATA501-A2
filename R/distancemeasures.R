@@ -58,7 +58,7 @@ cooks_distance_lm <- function(model) {
 
   p <- model$rank
   # equation 7 in Cook 1977
-  D <- ((resid / (sd * sqrt((1 - hat)))^2 * hat) / (p * (1 - hat)))
+  D <- ((resid / (sd * sqrt((1 - hat))))^2 * hat / (p * (1 - hat)))
   D[is.infinite(D)] <- NaN
   return(D)
 }
