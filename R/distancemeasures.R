@@ -61,6 +61,8 @@ cooks_distance_lm <- function(model) {
   D <- ((resid / (sd * sqrt((1 - hat))))^2 * hat / (p * (1 - hat)))
   D[is.infinite(D)] <- NaN
   return(D)
+
+
 }
 
 # based on https://avys.omu.edu.tr/storage/app/public/rezzanu/141865/[David_A._Belsley,_Edwin_Kuh,_Roy_E._Welsch]_Regre(BookFi.org).pdf
@@ -70,8 +72,7 @@ dffits_lm <- function(model) {
   sigma <- stats::lm.influence(model, do.coef = FALSE)$sigma
   res <- stats::weighted.residuals(model)
   # based on equation 2.11 on page 15 of Belsley 1980
-  # re-written to avoid one sqrt(1-hat)
-  dffits <- res * sqrt(hat) / (sigma * (1 - hat))
+  dffits <-  sqrt(hat/(1-hat))* (res/ (sigma * sqrt(1 - hat)))
   dffits[is.infinite(dffits)] <- NaN
   return(dffits)
 }
