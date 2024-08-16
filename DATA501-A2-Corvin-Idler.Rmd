@@ -51,7 +51,7 @@ distances(mtcars,model)
 The user facing function distances() makes use of the following helper functions (one for each distance/influence measure):
 
 ## Cooks distance
-Below implementation is based on @Cook1977 (page 16ff.)
+Below implementation is based on @Cook1977 (page 16ff.). The Cook's distance is one of the most widely used influence measures and measures the difference in regression results (coefficients) in a "leave-one-out"-fashion for each obeservation in the input data set @Chatterjee2015 (page 111).
 
 ```{r cookscode, include=TRUE}
 # based on https://doi.org/10.1080/00401706.1977.10489493

@@ -63,7 +63,6 @@ cooks_distance_lm <- function(model) {
   return(D)
 }
 
-
 # based on https://avys.omu.edu.tr/storage/app/public/rezzanu/141865/[David_A._Belsley,_Edwin_Kuh,_Roy_E._Welsch]_Regre(BookFi.org).pdf
 # and https://github.com/SurajGupta/r-source/blob/master/src/library/stats/R/lm.influence.R
 dffits_lm <- function(model) {
