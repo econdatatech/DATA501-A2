@@ -98,7 +98,7 @@ dffits_lm <- function(model) {
 ```
 
 ## Hadi
-Ali Haid criticises in his 1992 paper that all prexisting influence measure only assessed the influence on a specific regression result, he on the other hand proposes "a measure of overall potential influence" @Hadi1992. The implementation below is based on the formula on page 113 in @Chatterjee2015. The formula tries to measure "outlyingness" and X-space (first term) as well as response variable space (second term) @Chatterjee2015.
+Ali Haid criticises in his 1992 paper that all prexisting influence measure only assessed the influence on a specific regression result, he on the other hand proposes "a measure of overall potential influence" @Hadi1992. The implementation below is based on the formula on page 113 in @Chatterjee2015. The formula tries to measure "outlyingness" in X-space (first term) as well as response variable space (second term) @Chatterjee2015.
 ```{r hadicode, include=TRUE}
 #based on https://ideas.repec.org/a/eee/csdana/v14y1992i1p1-27.html
 #and https://sadbhavnapublications.org/research-enrichment-material/2-Statistical-Books/Regression-Analysis-by-Example.pdf
