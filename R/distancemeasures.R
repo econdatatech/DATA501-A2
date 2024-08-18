@@ -33,9 +33,10 @@ distances <- function(data, model, plots=TRUE){
   hadi <- hadi_lm(model)
 
   if (plots) {
-    # divide frame in 2X2 grid
+    # store original settings and then divide frame in 2X2 grid
+    op <- graphics::par(no.readonly = TRUE)
+    on.exit(par(op), add = TRUE)
     graphics::par(mfrow = c(2, 2))
-    # draw 4 plots
     plot(cooks, layout = NULL)
     plot(dffits, layout = NULL)
     plot(hadi, layout = NULL)
